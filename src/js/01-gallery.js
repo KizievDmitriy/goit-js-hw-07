@@ -21,5 +21,34 @@ const createGalleryItems = ({preview, original, description}) => {
 const galleryElements = galleryItems.map(createGalleryItems);
 galleryList.append(...galleryElements);
 
+galleryList.addEventListener ("click", selectPicture);
+
+function selectPicture (event) {
+    event.preventDefault();
+
+    if (event.target.classList.contains(".gallery")) {
+        return;
+    }
+
+    const bigPictureUrl = event.target.dataset.source;
+
+
+    const bigPicture = basicLightbox.create (`
+    <img src="${bigPictureUrl}" width="800" height="600">
+    `, {
+        onShow: (bigPicture) => {
+        window.addEventListener("keydown", (event) => {           
+            if (event.code === "Escape") {
+            bigPicture.close();
+            }
+          });
+        }
+        
+    });
+
+    bigPicture.show()
+}
+
+
 
 
