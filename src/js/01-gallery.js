@@ -32,12 +32,21 @@ function selectPicture (event) {
 
     const bigPictureUrl = event.target.dataset.source;
 
-
     const bigPicture = basicLightbox.create (`
     <img src="${bigPictureUrl}" width="800" height="600">
     `, {
+
         onShow: (bigPicture) => {
         window.addEventListener("keydown", (event) => {           
+            if (event.code === "Escape") {
+                bigPicture.close();
+                
+            }
+          });
+        },
+        
+        onClose: (bigPicture) => {
+        window.removeEventListener("keydown", (event) => {           
             if (event.code === "Escape") {
             bigPicture.close();
             }
