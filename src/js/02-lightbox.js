@@ -20,3 +20,21 @@ const createGalleryItems = ({preview, original, description}) => {
 
 const galleryElements = galleryItems.map(createGalleryItems);
 galleryList.append(...galleryElements);
+
+galleryList.addEventListener("click", selectPicture);
+
+const imgOptions = {
+    captionType: 'attr',
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
+    alertErrorMessage: 'Image not found, next image will be loaded',
+};
+   
+function selectPicture (event) {
+    event.preventDefault();   
+}
+
+const lightbox = new SimpleLightbox('.gallery a', imgOptions);
+
+    
