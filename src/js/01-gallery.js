@@ -36,25 +36,21 @@ function selectPicture (event) {
     <img src="${bigPictureUrl}" width="800" height="600">
     `, {
 
-        onShow: (bigPicture) => {
-        window.addEventListener("keydown", (event) => {           
-            if (event.code === "Escape") {
-                bigPicture.close();
-                
-            }
-          });
+        onShow: () => {
+        window.addEventListener("keydown", onEscClose);
         },
         
-        onClose: (bigPicture) => {
-        window.removeEventListener("keydown", (event) => {           
-            if (event.code === "Escape") {
-            bigPicture.close();
-            }
-          });
+        onClose: () => {
+        window.removeEventListener("keydown", onEscClose);
         }
         
     });
-
+    
+    const onEscClose = function (event) {
+            if (event.code === "Escape") {
+            bigPicture.close();
+            }
+        }
     bigPicture.show()
 }
 
